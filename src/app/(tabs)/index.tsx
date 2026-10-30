@@ -21,6 +21,8 @@ import { useDbQuery } from '@/hooks/use-db-query';
 import { CITY_CENTERS, useAppState } from '@/lib/app-state';
 import { distanceKm, TASHKENT_CENTER } from '@/lib/geo';
 
+// Busiest sports shown on the home grid; the rest are on the events screen.
+const HOME_SPORTS_COUNT = 8;
 const NEARBY_COUNT = 6;
 
 function goToEvents(params: Record<string, string>) {
@@ -131,7 +133,7 @@ export default function HomePage() {
           {/* SportsSection */}
           <SectionHeader title="Sport turlari" action="Barchasini koʻrish" onAction={() => goToEvents({})} />
           <View style={styles.sportsGrid}>
-            {data.sports.map((sport) => (
+            {data.sports.slice(0, HOME_SPORTS_COUNT).map((sport) => (
               <Pressable
                 key={sport.sport_id}
                 onPress={() => goToEvents({ sport: String(sport.sport_id) })}
