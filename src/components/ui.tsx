@@ -75,8 +75,9 @@ export function SectionHeader({
     <View style={styles.sectionHeader}>
       <AppText variant="title">{title}</AppText>
       {action && onAction ? (
-        <Pressable onPress={onAction} hitSlop={8} accessibilityRole="button">
+        <Pressable onPress={onAction} hitSlop={8} accessibilityRole="button" style={styles.sectionAction}>
           <AppText variant="link">{action}</AppText>
+          <Icon name="chevron-right" size={18} color={Colors.primary} />
         </Pressable>
       ) : null}
     </View>
@@ -109,6 +110,7 @@ export function Chip({
 export function Button({
   label,
   icon,
+  trailingIcon,
   onPress,
   variant = 'primary',
   disabled,
@@ -116,6 +118,7 @@ export function Button({
 }: {
   label: string;
   icon?: IconName;
+  trailingIcon?: IconName;
   onPress?: () => void;
   variant?: 'primary' | 'secondary' | 'success';
   disabled?: boolean;
@@ -137,6 +140,7 @@ export function Button({
       ]}>
       {icon ? <Icon name={icon} size={20} color={palette.fg} /> : null}
       <AppText style={[styles.buttonText, { color: palette.fg }]}>{label}</AppText>
+      {trailingIcon ? <Icon name={trailingIcon} size={20} color={palette.fg} /> : null}
     </Pressable>
   );
 }
@@ -144,8 +148,8 @@ export function Button({
 export function VerifiedBadge({ small }: { small?: boolean }) {
   return (
     <View style={[styles.badge, { backgroundColor: Colors.verifiedBg }]}>
-      <Icon name="check-decagram" size={small ? 12 : 14} color={Colors.verifiedText} />
-      <AppText style={[styles.badgeText, { color: Colors.verifiedText }]}>Verified</AppText>
+      <Icon name="check-circle" size={small ? 13 : 15} color={Colors.primary} />
+      <AppText style={[styles.badgeText, { color: Colors.verifiedText }]}>Tasdiqlangan</AppText>
     </View>
   );
 }
@@ -169,7 +173,7 @@ export function StatusPill({ status }: { status: EventStatus }) {
 export function SampleTag() {
   return (
     <View style={[styles.badge, { backgroundColor: Colors.warningBg }]}>
-      <AppText style={[styles.badgeText, { color: Colors.warningText }]}>Sample event</AppText>
+      <AppText style={[styles.badgeText, { color: Colors.warningText }]}>Namuna tadbir</AppText>
     </View>
   );
 }
@@ -213,9 +217,9 @@ export function ErrorState({ error, onRetry }: { error: Error; onRetry: () => vo
   return (
     <EmptyState
       icon="alert-circle-outline"
-      title="Something went wrong"
+      title="Xatolik yuz berdi"
       message={error.message}
-      action={<Button label="Try again" variant="secondary" onPress={onRetry} />}
+      action={<Button label="Qayta urinish" variant="secondary" onPress={onRetry} />}
     />
   );
 }
@@ -247,6 +251,7 @@ const styles = StyleSheet.create({
   },
   text: { color: Colors.text, fontFamily: Fonts.sans },
   centerText: { textAlign: 'center' },
+  sectionAction: { flexDirection: 'row', alignItems: 'center' },
   sectionHeader: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -262,9 +267,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: Spacing.md,
     height: 36,
     borderRadius: Radius.pill,
-    backgroundColor: Colors.surface,
+    backgroundColor: Colors.control,
     borderWidth: 1,
-    borderColor: Colors.border,
+    borderColor: Colors.control,
   },
   chipSelected: { backgroundColor: Colors.primary, borderColor: Colors.primary },
   chipText: { fontSize: FontSize.sm, fontWeight: '600', color: Colors.text },

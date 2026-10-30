@@ -1,8 +1,8 @@
 import type { SQLiteDatabase } from 'expo-sqlite';
 
-import { seedSampleData } from './seed';
+import { applySampleImages, seedSampleData } from './seed';
 
-const SCHEMA_VERSION = 1;
+const SCHEMA_VERSION = 2;
 
 // Mirrors the relational model in the product brief. Kept portable so it can move
 // to a hosted Postgres database (e.g. Supabase) when organizers start adding events.
@@ -92,6 +92,9 @@ export async function initializeDatabase(db: SQLiteDatabase) {
     if (version.user_version < 1) {
       await db.execAsync(SCHEMA_V1);
       await seedSampleData(db);
+    }
+    if (version.user_version < 2) {
+      await applySampleImages(db);
     }
     await db.execAsync(`PRAGMA user_version = ${SCHEMA_VERSION}`);
   });

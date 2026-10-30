@@ -79,8 +79,8 @@ export default function EventDetailsPage() {
       <Screen edges={[]}>
         <EmptyState
           icon="calendar-remove-outline"
-          title="Event not found"
-          message="This event may have been removed by its organizer."
+          title="Tadbir topilmadi"
+          message="Bu tadbir tashkilotchi tomonidan olib tashlangan boʻlishi mumkin."
         />
       </Screen>
     );
@@ -92,7 +92,7 @@ export default function EventDetailsPage() {
     setBusy(true);
     try {
       await setEventSaved(db, userId, event.event_id, !event.is_saved);
-      setMessage(event.is_saved ? null : { tone: 'info', text: 'Saved. You can find it in the Saved tab.' });
+      setMessage(event.is_saved ? null : { tone: 'info', text: "Saqlandi. Uni \"Saqlangan\" boʻlimida topasiz." });
       reload();
     } finally {
       setBusy(false);
@@ -104,11 +104,11 @@ export default function EventDetailsPage() {
     try {
       const result = await registerForEvent(db, userId, event.event_id);
       if (result === 'registered') {
-        setMessage({ tone: 'success', text: `You're registered for ${event.title}. See you there!` });
+        setMessage({ tone: 'success', text: `Siz "${event.title}" tadbiriga roʻyxatdan oʻtdingiz. Koʻrishguncha!` });
       } else if (result === 'already_registered') {
-        setMessage({ tone: 'info', text: 'You are already registered for this event.' });
+        setMessage({ tone: 'info', text: "Siz bu tadbirga allaqachon roʻyxatdan oʻtgansiz." });
       } else {
-        setMessage({ tone: 'info', text: 'Registration is closed for this event.' });
+        setMessage({ tone: 'info', text: "Bu tadbirga roʻyxatdan oʻtish yopilgan." });
       }
       reload();
     } finally {
@@ -137,16 +137,16 @@ export default function EventDetailsPage() {
         <AppText style={styles.title}>{event.title}</AppText>
 
         <View style={styles.card}>
-          <InfoRow icon="calendar-blank-outline" label="Date" value={formatLongDate(event.date)} />
-          <InfoRow icon="clock-outline" label="Start time" value={event.start_time} />
-          <InfoRow icon="map-marker-outline" label="Location" value={`${event.location}, ${event.city}`} />
-          <InfoRow icon="ticket-outline" label="Entry" value={formatPrice(event.price)} />
+          <InfoRow icon="calendar-blank-outline" label="Sana" value={formatLongDate(event.date)} />
+          <InfoRow icon="clock-outline" label="Boshlanish vaqti" value={event.start_time} />
+          <InfoRow icon="map-marker-outline" label="Manzil" value={`${event.location}, ${event.city}`} />
+          <InfoRow icon="ticket-outline" label="Kirish" value={formatPrice(event.price)} />
         </View>
 
-        <AppText variant="title">About this event</AppText>
-        <AppText style={styles.description}>{event.description || 'No description yet.'}</AppText>
+        <AppText variant="title">Tadbir haqida</AppText>
+        <AppText style={styles.description}>{event.description || "Hozircha tavsif yoʻq."}</AppText>
 
-        <AppText variant="title">Organizer</AppText>
+        <AppText variant="title">Tashkilotchi</AppText>
         <View style={[styles.card, styles.organizer]}>
           <View style={styles.organizerLogo}>
             <Icon name="account-group" size={24} color={Colors.primary} />
@@ -162,10 +162,10 @@ export default function EventDetailsPage() {
           </View>
         </View>
 
-        <AppText variant="caption">Last updated {formatTimestamp(event.last_updated)}</AppText>
+        <AppText variant="caption">Oxirgi yangilanish: {formatTimestamp(event.last_updated)}</AppText>
         {event.is_sample ? (
           <AppText variant="caption">
-            Sample event for the demo. Organizer, location and verification are not real.
+            Namuna tadbir. Tashkilotchi, manzil va tasdiq haqiqiy emas.
           </AppText>
         ) : null}
 
@@ -183,7 +183,7 @@ export default function EventDetailsPage() {
 
         <View style={styles.actions}>
           <Button
-            label={event.is_saved ? 'Saved' : 'Save Event'}
+            label={event.is_saved ? 'Saqlangan' : 'Saqlash'}
             icon={event.is_saved ? 'bookmark' : 'bookmark-outline'}
             variant="secondary"
             onPress={toggleSave}
@@ -191,10 +191,10 @@ export default function EventDetailsPage() {
             style={styles.action}
           />
           {event.is_registered ? (
-            <Button label="Registered" icon="check" variant="success" disabled style={styles.action} />
+            <Button label="Roʻyxatdan oʻtilgan" icon="check" variant="success" disabled style={styles.action} />
           ) : (
             <Button
-              label={isOpen ? 'Register' : event.status === 'cancelled' ? 'Cancelled' : 'Event ended'}
+              label={isOpen ? "Roʻyxatdan oʻtish" : event.status === 'cancelled' ? 'Bekor qilingan' : 'Tadbir tugagan'}
               icon={isOpen ? 'account-plus-outline' : undefined}
               onPress={register}
               disabled={busy || !isOpen}

@@ -36,7 +36,7 @@ function BookmarkButton({ saved, onPress }: { saved: boolean; onPress: () => voi
       onPress={onPress}
       hitSlop={10}
       accessibilityRole="button"
-      accessibilityLabel={saved ? 'Remove from saved' : 'Save event'}
+      accessibilityLabel={saved ? 'Saqlanganlardan olib tashlash' : 'Tadbirni saqlash'}
       style={styles.bookmark}>
       <Icon name={saved ? 'bookmark' : 'bookmark-outline'} size={20} color={Colors.primary} />
     </Pressable>
@@ -125,7 +125,7 @@ export function EventCardCompact({ event }: { event: EventListItem }) {
   );
 }
 
-/** Large highlighted card on the Home page. */
+/** Highlighted card on the Home page: photo on the left, details on the right. */
 export function FeaturedEventCard({ event }: { event: EventListItem }) {
   return (
     <View style={[styles.card, styles.featured]}>
@@ -134,22 +134,21 @@ export function FeaturedEventCard({ event }: { event: EventListItem }) {
         sportId={event.sport_id}
         sportIcon={event.sport_icon}
         style={styles.featuredImage}
-        iconSize={64}
+        iconSize={44}
       />
-      <View style={styles.cardBody}>
-        <View style={styles.rowBetween}>
-          <AppText style={styles.sportLabel}>FEATURED · {event.sport_name.toUpperCase()}</AppText>
-          {event.verified ? <VerifiedBadge small /> : null}
-        </View>
-        <AppText variant="title" style={styles.featuredTitle}>
+      <View style={styles.featuredBody}>
+        {event.verified ? <VerifiedBadge small /> : null}
+        <AppText style={styles.featuredTitle} numberOfLines={2}>
           {event.title}
         </AppText>
-        <MetaRow
-          icon="calendar-blank-outline"
-          text={`${formatEventDate(event.date)} · ${event.start_time}`}
+        <MetaRow icon="calendar-blank-outline" text={`${formatEventDate(event.date)}, ${event.start_time}`} />
+        <MetaRow icon="map-marker-outline" text={`${event.city}, ${event.location}`} />
+        <Button
+          label="Tadbirni koʻrish"
+          trailingIcon="chevron-right"
+          onPress={() => openEvent(event.event_id)}
+          style={styles.featuredButton}
         />
-        <MetaRow icon="map-marker-outline" text={`${event.location}, ${event.city}`} />
-        <Button label="View Event" onPress={() => openEvent(event.event_id)} style={styles.featuredButton} />
       </View>
     </View>
   );
@@ -199,8 +198,14 @@ const styles = StyleSheet.create({
   compactImage: { height: 110 },
   compactBody: { padding: Spacing.md, gap: 4 },
   compactTitle: { fontSize: FontSize.md, fontWeight: '700', minHeight: 40 },
-  featured: { marginHorizontal: Spacing.lg },
-  featuredImage: { height: 180 },
-  featuredTitle: { fontSize: FontSize.xl },
-  featuredButton: { marginTop: Spacing.sm },
+  featured: {
+    marginHorizontal: Spacing.lg,
+    flexDirection: 'row',
+    padding: Spacing.md,
+    gap: Spacing.md,
+  },
+  featuredImage: { width: 120, alignSelf: 'stretch', minHeight: 150, borderRadius: Radius.md },
+  featuredBody: { flex: 1, gap: 6, minWidth: 0 },
+  featuredTitle: { fontSize: FontSize.lg, fontWeight: '800' },
+  featuredButton: { marginTop: Spacing.xs, minHeight: 42 },
 });

@@ -15,7 +15,7 @@ import {
   SectionHeader,
   type IconName,
 } from '@/components/ui';
-import { Colors, FontSize, Radius, Shadow, Spacing } from '@/constants/theme';
+import { Colors, FontSize, Radius, Shadow, SportColors, Spacing } from '@/constants/theme';
 import { listCities, listEvents, listSports } from '@/db/events';
 import { useDbQuery } from '@/hooks/use-db-query';
 import { CITY_CENTERS, useAppState } from '@/lib/app-state';
@@ -68,7 +68,7 @@ export default function HomePage() {
         <Pressable
           onPress={() => setPickerOpen(true)}
           accessibilityRole="button"
-          accessibilityLabel={`Location: ${city}. Change city`}
+          accessibilityLabel={`Joylashuv: ${city}. Shaharni oʻzgartirish`}
           style={styles.location}>
           <Icon name="map-marker" size={20} color={Colors.primary} />
           <AppText style={styles.locationText}>{city}</AppText>
@@ -77,9 +77,9 @@ export default function HomePage() {
         <Pressable
           onPress={() => router.push('/profile')}
           accessibilityRole="button"
-          accessibilityLabel="Profile"
+          accessibilityLabel="Profil"
           style={styles.avatar}>
-          <Icon name="account" size={22} color={Colors.primary} />
+          <Icon name="account" size={24} color={Colors.textSecondary} />
         </Pressable>
       </View>
 
@@ -109,21 +109,21 @@ export default function HomePage() {
       ) : data ? (
         <>
           {/* FeaturedSection */}
-          <SectionHeader title="Featured" />
+          <SectionHeader title="Tavsiya etilgan tadbir" action="Barchasini koʻrish" onAction={() => goToEvents({})} />
           {data.featured ? (
             <FeaturedEventCard event={data.featured} />
           ) : (
             <EmptyState
               icon="calendar-blank-outline"
-              title={`No upcoming events in ${city} yet`}
-              message="Try another city or check back soon."
+              title={`${city} shahrida hozircha tadbirlar yoʻq`}
+              message="Boshqa shaharni tanlang yoki keyinroq qayting."
             />
           )}
 
           {/* NearbySection */}
           {data.nearby.length > 0 ? (
             <>
-              <SectionHeader title={`Nearby in ${city}`} action="See all" onAction={() => goToEvents({})} />
+              <SectionHeader title="Yaqin atrofdagi tadbirlar" action="Barchasini koʻrish" onAction={() => goToEvents({})} />
               <FlatList
                 horizontal
                 data={data.nearby}
@@ -136,18 +136,20 @@ export default function HomePage() {
           ) : null}
 
           {/* SportsSection */}
-          <SectionHeader title="Sports" />
+          <SectionHeader title="Sport turlari" action="Barchasini koʻrish" onAction={() => goToEvents({})} />
           <View style={styles.sportsGrid}>
             {data.sports.map((sport) => (
               <Pressable
                 key={sport.sport_id}
                 onPress={() => goToEvents({ sport: String(sport.sport_id) })}
                 accessibilityRole="button"
-                accessibilityLabel={`${sport.name} events`}
+                accessibilityLabel={`${sport.name} tadbirlari`}
                 style={({ pressed }) => [styles.sportTile, pressed && styles.pressed]}>
-                <View style={styles.sportIcon}>
-                  <Icon name={sport.icon as IconName} size={24} color={Colors.primary} />
-                </View>
+                <Icon
+                  name={sport.icon as IconName}
+                  size={26}
+                  color={SportColors[sport.sport_id] ?? Colors.primary}
+                />
                 <AppText style={styles.sportName}>{sport.name}</AppText>
               </Pressable>
             ))}
@@ -165,14 +167,18 @@ export default function HomePage() {
 
       {/* CTASection */}
       <View style={styles.cta}>
-        <AppText style={styles.ctaTitle}>Discover Your Next Sporting Event</AppText>
-        <AppText style={styles.ctaText}>Find events, competitions and activities happening near you.</AppText>
+        <View style={styles.ctaCopy}>
+          <AppText style={styles.ctaTitle}>Sport tadbirlarini kashf eting</AppText>
+          <AppText style={styles.ctaText}>
+            Yaqiningizdagi musobaqalar, turnirlar va sport tadbirlarini toping.
+          </AppText>
+        </View>
         <Pressable
           onPress={() => goToEvents({})}
           accessibilityRole="button"
           style={({ pressed }) => [styles.ctaButton, pressed && styles.pressed]}>
-          <AppText style={styles.ctaButtonText}>Explore Events</AppText>
-          <Icon name="arrow-right" size={18} color={Colors.primary} />
+          <AppText style={styles.ctaButtonText}>Tadbirlarni koʻrish</AppText>
+          <Icon name="chevron-right" size={18} color={Colors.primary} />
         </Pressable>
       </View>
     </Screen>
@@ -193,7 +199,7 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 20,
-    backgroundColor: Colors.primarySoft,
+    backgroundColor: Colors.control,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -222,14 +228,6 @@ const styles = StyleSheet.create({
     borderColor: Colors.border,
     ...Shadow,
   },
-  sportIcon: {
-    width: 44,
-    height: 44,
-    borderRadius: Radius.md,
-    backgroundColor: Colors.primarySoft,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
   sportName: { fontWeight: '600', flexShrink: 1 },
   pressed: { opacity: 0.75 },
   cta: {
@@ -238,16 +236,18 @@ const styles = StyleSheet.create({
     padding: Spacing.xl,
     borderRadius: Radius.lg,
     backgroundColor: Colors.primary,
-    gap: Spacing.sm,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    alignItems: 'center',
+    gap: Spacing.lg,
   },
-  ctaTitle: { color: Colors.surface, fontSize: FontSize.xl, fontWeight: '800' },
-  ctaText: { color: Colors.primarySoft, fontSize: FontSize.sm },
+  ctaCopy: { flexGrow: 1, flexBasis: 200, gap: Spacing.xs },
+  ctaTitle: { color: Colors.surface, fontSize: FontSize.lg, fontWeight: '800' },
+  ctaText: { color: Colors.ctaMuted, fontSize: FontSize.sm },
   ctaButton: {
     flexDirection: 'row',
     alignItems: 'center',
-    alignSelf: 'flex-start',
-    gap: Spacing.sm,
-    marginTop: Spacing.sm,
+    gap: 4,
     paddingHorizontal: Spacing.lg,
     height: 44,
     borderRadius: Radius.md,

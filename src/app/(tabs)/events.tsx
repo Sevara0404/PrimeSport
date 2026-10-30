@@ -72,8 +72,8 @@ export default function EventsPage() {
           filters.city = null;
           setLocationNote(
             location.isDevice
-              ? `Within ${NEAR_ME_RADIUS_KM} km of you`
-              : `Location is off, showing events within ${NEAR_ME_RADIUS_KM} km of central ${city}`,
+              ? `Sizdan ${NEAR_ME_RADIUS_KM} km radiusda`
+              : `Joylashuv oʻchiq: ${city} markazidan ${NEAR_ME_RADIUS_KM} km radiusdagi tadbirlar`,
           );
         } else {
           setLocationNote(null);
@@ -120,7 +120,7 @@ export default function EventsPage() {
   const header = (
     <View style={styles.header}>
       <AppText variant="heading" style={styles.inset}>
-        Events
+        Tadbirlar
       </AppText>
       <SearchBar value={query} onChangeText={setQuery} />
       <View style={styles.filterBlock}>
@@ -132,19 +132,19 @@ export default function EventsPage() {
           onPress={() => setPickerOpen(true)}
           disabled={nearMe}
           accessibilityRole="button"
-          accessibilityLabel="Change city"
+          accessibilityLabel="Shaharni oʻzgartirish"
           style={styles.cityButton}>
           <Icon name="map-marker-outline" size={16} color={nearMe ? Colors.textSecondary : Colors.primary} />
           <AppText variant="link" style={nearMe && styles.muted}>
-            {nearMe ? 'Near you' : allCities ? 'All cities' : city}
+            {nearMe ? 'Yaqinimda' : allCities ? 'Barcha shaharlar' : city}
           </AppText>
         </Pressable>
         <AppText variant="secondary">
-          {data ? `${data.events.length} ${data.events.length === 1 ? 'event' : 'events'}` : ''}
+          {data ? `${data.events.length} ta tadbir` : ''}
         </AppText>
         {hasFilters ? (
           <Pressable onPress={clearFilters} hitSlop={8} accessibilityRole="button">
-            <AppText variant="link">Clear filters</AppText>
+            <AppText variant="link">Tozalash</AppText>
           </Pressable>
         ) : null}
       </View>
@@ -178,17 +178,17 @@ export default function EventsPage() {
           ) : (
             <EmptyState
               icon="calendar-search"
-              title="No events match"
+              title="Mos tadbir topilmadi"
               message={
                 hasFilters
-                  ? 'Try removing a filter or searching for something else.'
-                  : `There are no events in ${city} yet.`
+                  ? "Filtrni olib tashlang yoki boshqa soʻz bilan qidiring."
+                  : `${city} shahrida hozircha tadbirlar yoʻq.`
               }
               action={
                 hasFilters ? (
-                  <Button label="Clear filters" variant="secondary" onPress={clearFilters} />
+                  <Button label="Filtrlarni tozalash" variant="secondary" onPress={clearFilters} />
                 ) : !allCities ? (
-                  <Button label="Show all cities" variant="secondary" onPress={() => setAllCities(true)} />
+                  <Button label="Barcha shaharlar" variant="secondary" onPress={() => setAllCities(true)} />
                 ) : undefined
               }
             />
@@ -198,10 +198,10 @@ export default function EventsPage() {
       {data ? (
         <CityPicker
           visible={pickerOpen}
-          cities={['All cities', ...data.cities]}
-          selected={allCities ? 'All cities' : city}
+          cities={['Barcha shaharlar', ...data.cities]}
+          selected={allCities ? 'Barcha shaharlar' : city}
           onSelect={(choice) => {
-            if (choice === 'All cities') {
+            if (choice === 'Barcha shaharlar') {
               setAllCities(true);
             } else {
               setAllCities(false);

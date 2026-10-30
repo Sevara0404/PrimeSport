@@ -19,15 +19,15 @@ function parseDateKey(key: string): Date {
   return new Date(y, m - 1, d);
 }
 
-const WEEKDAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+const WEEKDAYS = ['Yak', 'Dush', 'Sesh', 'Chor', 'Pay', 'Jum', 'Shan'];
+const MONTHS = ['yan', 'fev', 'mar', 'apr', 'may', 'iyn', 'iyl', 'avg', 'sen', 'okt', 'noy', 'dek'];
 
-/** "Today", "Tomorrow", or "Sat, 1 Nov". */
+/** "Bugun", "Ertaga", or "Shan, 1 noy". */
 export function formatEventDate(key: string, now = new Date()): string {
-  if (key === toDateKey(now)) return 'Today';
+  if (key === toDateKey(now)) return 'Bugun';
   const tomorrow = new Date(now);
   tomorrow.setDate(now.getDate() + 1);
-  if (key === toDateKey(tomorrow)) return 'Tomorrow';
+  if (key === toDateKey(tomorrow)) return 'Ertaga';
   const date = parseDateKey(key);
   return `${WEEKDAYS[date.getDay()]}, ${date.getDate()} ${MONTHS[date.getMonth()]}`;
 }

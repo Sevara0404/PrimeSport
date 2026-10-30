@@ -19,10 +19,10 @@ export function CityPicker({
 }) {
   return (
     <Modal visible={visible} transparent animationType="fade" onRequestClose={onClose}>
-      <Pressable style={styles.backdrop} onPress={onClose} accessibilityLabel="Close city picker">
+      <Pressable style={styles.backdrop} onPress={onClose} accessibilityLabel="Yopish">
         <Pressable style={styles.sheet} onPress={() => {}}>
           <AppText variant="title" style={styles.title}>
-            Choose your city
+            Shaharni tanlang
           </AppText>
           {cities.map((city) => (
             <Pressable
@@ -40,7 +40,7 @@ export function CityPicker({
             </Pressable>
           ))}
           <View style={styles.footer}>
-            <AppText variant="caption">More cities will be added as organizers join.</AppText>
+            <AppText variant="caption">Tashkilotchilar qoʻshilishi bilan yangi shaharlar qoʻshiladi.</AppText>
           </View>
         </Pressable>
       </Pressable>

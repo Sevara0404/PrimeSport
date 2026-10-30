@@ -8,10 +8,10 @@ import { Chip, Icon, type IconName } from './ui';
 export type QuickFilter = 'today' | 'week' | 'near' | 'free';
 
 export const QUICK_FILTERS: { key: QuickFilter; label: string; icon: IconName }[] = [
-  { key: 'today', label: 'Today', icon: 'calendar-today' },
-  { key: 'week', label: 'This Week', icon: 'calendar-week' },
-  { key: 'near', label: 'Near Me', icon: 'crosshairs-gps' },
-  { key: 'free', label: 'Free', icon: 'ticket-outline' },
+  { key: 'today', label: 'Bugun', icon: 'calendar-today' },
+  { key: 'week', label: 'Shu hafta', icon: 'calendar-week' },
+  { key: 'near', label: 'Yaqinimda', icon: 'crosshairs-gps' },
+  { key: 'free', label: 'Bepul', icon: 'ticket-outline' },
 ];
 
 export function SearchBar({
@@ -32,17 +32,17 @@ export function SearchBar({
         value={value}
         onChangeText={onChangeText}
         onSubmitEditing={onSubmit}
-        placeholder="Search events..."
+        placeholder="Sport, tadbir yoki joy qidiring..."
         placeholderTextColor={Colors.textSecondary}
         returnKeyType="search"
         autoFocus={autoFocus}
         autoCorrect={false}
         maxLength={80}
-        accessibilityLabel="Search events"
+        accessibilityLabel="Tadbirlarni qidirish"
         style={styles.input}
       />
       {value ? (
-        <Pressable onPress={() => onChangeText('')} hitSlop={10} accessibilityLabel="Clear search">
+        <Pressable onPress={() => onChangeText('')} hitSlop={10} accessibilityLabel="Qidiruvni tozalash">
           <Icon name="close-circle" size={18} color={Colors.textSecondary} />
         </Pressable>
       ) : null}
@@ -83,7 +83,7 @@ export function SportFilterRow({
 }) {
   return (
     <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.row}>
-      <Chip label="All sports" selected={selected === null} onPress={() => onSelect(null)} />
+      <Chip label="Barcha sportlar" selected={selected === null} onPress={() => onSelect(null)} />
       {sports.map((s) => (
         <Chip
           key={s.sport_id}

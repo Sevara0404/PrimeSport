@@ -17,11 +17,11 @@ export default function RootLayout() {
             headerTitleStyle: { color: Colors.text },
             headerStyle: { backgroundColor: Colors.surface },
             contentStyle: { backgroundColor: Colors.background },
-            headerBackTitle: 'Back',
+            headerBackTitle: 'Orqaga',
           }}>
-          <Stack.Screen name="(tabs)" options={{ headerShown: false, title: 'Home' }} />
-          <Stack.Screen name="event/[id]" options={{ title: 'Event' }} />
-          <Stack.Screen name="profile" options={{ title: 'Profile' }} />
+          <Stack.Screen name="(tabs)" options={{ headerShown: false, title: 'Bosh sahifa' }} />
+          <Stack.Screen name="event/[id]" options={{ title: 'Tadbir' }} />
+          <Stack.Screen name="profile" options={{ title: 'Profil' }} />
         </Stack>
       </AppStateProvider>
     </SQLiteProvider>

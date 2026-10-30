@@ -63,19 +63,19 @@ export default function ProfilePage() {
         <View style={styles.avatar}>
           <Icon name="account" size={44} color={Colors.primary} />
         </View>
-        <AppText variant="title">{user?.name ?? 'Guest'}</AppText>
+        <AppText variant="title">{user?.name ?? 'Mehmon'}</AppText>
         <AppText variant="secondary">{user?.email ?? ''}</AppText>
         <View style={styles.demoNote}>
           <AppText variant="caption" style={styles.center}>
-            Demo account. Sign-in arrives in a later version.
+            Demo akkaunt. Tizimga kirish keyingi versiyada qoʻshiladi.
           </AppText>
         </View>
       </View>
 
-      <SectionHeader title="My Events" />
+      <SectionHeader title="Mening tadbirlarim" />
       {registered.length === 0 ? (
         <AppText variant="secondary" style={styles.inset}>
-          Events you register for will appear here.
+          Roʻyxatdan oʻtgan tadbirlaringiz shu yerda koʻrinadi.
         </AppText>
       ) : (
         <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.myEvents}>
@@ -88,19 +88,19 @@ export default function ProfilePage() {
       <View style={styles.menu}>
         <MenuRow
           icon="cog-outline"
-          label="Settings"
+          label="Sozlamalar"
           open={openSection === 'settings'}
           onPress={() => toggle('settings')}
         />
         {openSection === 'settings' ? (
           <AppText variant="secondary" style={styles.panel}>
-            Notifications, language and account settings will be available once sign-in is added.
+            Bildirishnomalar, til va akkaunt sozlamalari tizimga kirish qoʻshilgach paydo boʻladi.
           </AppText>
         ) : null}
         <View style={styles.divider} />
         <MenuRow
           icon="information-outline"
-          label="About"
+          label="Ilova haqida"
           open={openSection === 'about'}
           onPress={() => toggle('about')}
         />
@@ -109,9 +109,9 @@ export default function ProfilePage() {
             <AppText style={styles.bold}>PRIME SPORT</AppText>
             <AppText variant="secondary">Discover. Participate. Enjoy.</AppText>
             <AppText variant="secondary">
-              Find sporting events, competitions and activities around Tashkent and across Uzbekistan.
+              Toshkent va butun Oʻzbekiston boʻylab sport tadbirlari, musobaqalar va mashgʻulotlarni toping.
             </AppText>
-            <AppText variant="caption">Version {Constants.expoConfig?.version ?? '1.0.0'}</AppText>
+            <AppText variant="caption">Versiya {Constants.expoConfig?.version ?? '1.0.0'}</AppText>
           </View>
         ) : null}
       </View>

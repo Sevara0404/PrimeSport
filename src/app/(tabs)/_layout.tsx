@@ -4,10 +4,10 @@ import { Icon, type IconName } from '@/components/ui';
 import { Colors } from '@/constants/theme';
 
 const TABS: { name: string; title: string; icon: IconName; activeIcon: IconName }[] = [
-  { name: 'index', title: 'Home', icon: 'home-outline', activeIcon: 'home' },
-  { name: 'events', title: 'Events', icon: 'calendar-blank-outline', activeIcon: 'calendar-blank' },
-  { name: 'map', title: 'Map', icon: 'map-outline', activeIcon: 'map' },
-  { name: 'saved', title: 'Saved', icon: 'bookmark-outline', activeIcon: 'bookmark' },
+  { name: 'index', title: 'Bosh sahifa', icon: 'home-outline', activeIcon: 'home' },
+  { name: 'events', title: 'Tadbirlar', icon: 'calendar-blank-outline', activeIcon: 'calendar-blank' },
+  { name: 'map', title: 'Xarita', icon: 'map-outline', activeIcon: 'map' },
+  { name: 'saved', title: 'Saqlangan', icon: 'bookmark-outline', activeIcon: 'bookmark' },
 ];
 
 export default function TabLayout() {

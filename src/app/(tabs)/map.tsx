@@ -42,8 +42,8 @@ export default function MapPage() {
   return (
     <Screen scroll={false}>
       <View style={styles.header}>
-        <AppText variant="heading">Map</AppText>
-        {hasSample ? <AppText variant="caption">Sample events at approximate demo locations.</AppText> : null}
+        <AppText variant="heading">Xarita</AppText>
+        {hasSample ? <AppText variant="caption">Namuna tadbirlar taxminiy joylarda koʻrsatilgan.</AppText> : null}
       </View>
       {data ? (
         <View style={styles.filters}>
@@ -78,7 +78,7 @@ export default function MapPage() {
             <Pressable
               onPress={() => setSelectedId(null)}
               hitSlop={10}
-              accessibilityLabel="Close preview"
+              accessibilityLabel="Yopish"
               style={styles.close}>
               <Icon name="close" size={18} color={Colors.textSecondary} />
             </Pressable>
@@ -103,7 +103,7 @@ export default function MapPage() {
                 {selected.verified ? <VerifiedBadge small /> : null}
               </View>
             </View>
-            <Button label="View Details" onPress={() => openEvent(selected.event_id)} />
+            <Button label="Batafsil koʻrish" trailingIcon="chevron-right" onPress={() => openEvent(selected.event_id)} />
           </View>
         ) : null}
       </View>

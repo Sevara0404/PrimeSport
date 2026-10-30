@@ -293,3 +293,33 @@ export async function seedSampleData(db: SQLiteDatabase) {
     'demo@example.com',
   );
 }
+
+// Free photos from Unsplash (Unsplash License, no attribution required). Credits:
+// Connor Coyne, CloudVisual India, Markus Spiske, Anastasia Chistik, Jannes Glas,
+// Lysander Yuen, Nathan Dumlao.
+const photo = (id: string) => `https://images.unsplash.com/${id}?w=800&q=75&fm=jpg&fit=crop`;
+const SAMPLE_IMAGES: Record<string, string> = {
+  'Tashkent Basketball Cup': photo('photo-1546519638-68e109498ffc'),
+  '3x3 Street Basketball': photo('photo-1546519638-68e109498ffc'),
+  'Tennis Open Tashkent': photo('photo-1632755898125-36cd72575dde'),
+  'Junior Tennis Clinic': photo('photo-1632755898125-36cd72575dde'),
+  'City Judo Championship': photo('photo-1603297430252-fdecb501149b'),
+  'Sunday Park Run': photo('photo-1549896869-ca27eeffe4fb'),
+  'Athletics Open Day': photo('photo-1549896869-ca27eeffe4fb'),
+  'Registan Half Marathon': photo('photo-1549896869-ca27eeffe4fb'),
+  'Five-a-Side Evening League': photo('photo-1503753024571-3e39032c3807'),
+  'Stadium Football Open Day': photo('photo-1579952363873-27f3bade9f55'),
+  'Samarkand Football Friendly': photo('photo-1579952363873-27f3bade9f55'),
+  'Volleyball Social Mixer': photo('photo-1612872087720-bb876e2e67d1'),
+  'Weekend Volleyball Tournament': photo('photo-1612872087720-bb876e2e67d1'),
+};
+
+/** Schema v2: sport photos for the sample events and the Uzbek name for "Other". */
+export async function applySampleImages(db: SQLiteDatabase) {
+  for (const [title, image] of Object.entries(SAMPLE_IMAGES)) {
+    await db.runAsync('UPDATE events SET image = ? WHERE title = ? AND is_sample = 1', image, title);
+  }
+  await db.runAsync(
+    `UPDATE sports SET name = 'Boshqa', icon = 'dots-horizontal' WHERE sport_id = 6 AND name = 'Other'`,
+  );
+}

@@ -35,10 +35,10 @@ export default function SavedPage() {
         )}
         ListHeaderComponent={
           <View style={[styles.inset, styles.header]}>
-            <AppText variant="heading">Saved</AppText>
+            <AppText variant="heading">Saqlangan</AppText>
             {data && data.length > 0 ? (
               <AppText variant="secondary">
-                {data.length} saved {data.length === 1 ? 'event' : 'events'}
+                {data.length} ta saqlangan tadbir
               </AppText>
             ) : null}
           </View>
@@ -53,9 +53,9 @@ export default function SavedPage() {
           ) : (
             <EmptyState
               icon="bookmark-outline"
-              title="No saved events yet"
-              message="Tap the bookmark on any event to keep it here."
-              action={<Button label="Explore Events" onPress={() => router.navigate('/events')} />}
+              title="Hozircha saqlangan tadbir yoʻq"
+              message="Tadbirni bu yerda saqlash uchun xatchoʻp belgisini bosing."
+              action={<Button label="Tadbirlarni koʻrish" onPress={() => router.navigate('/events')} />}
             />
           )
         }
