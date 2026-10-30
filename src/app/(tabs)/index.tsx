@@ -21,6 +21,8 @@ import { useDbQuery } from '@/hooks/use-db-query';
 import { CITY_CENTERS, useAppState } from '@/lib/app-state';
 import { distanceKm, TASHKENT_CENTER } from '@/lib/geo';
 
+// Busiest sports shown on the home grid; the rest are on the events screen.
+const HOME_SPORTS_COUNT = 8;
 const NEARBY_COUNT = 6;
 
 function goToEvents(params: Record<string, string>) {
@@ -73,13 +75,6 @@ export default function HomePage() {
           <Icon name="map-marker" size={20} color={Colors.primary} />
           <AppText style={styles.locationText}>{city}</AppText>
           <Icon name="chevron-down" size={18} color={Colors.textSecondary} />
-        </Pressable>
-        <Pressable
-          onPress={() => router.push('/profile')}
-          accessibilityRole="button"
-          accessibilityLabel="Profil"
-          style={styles.avatar}>
-          <Icon name="account" size={24} color={Colors.textSecondary} />
         </Pressable>
       </View>
 
@@ -138,7 +133,7 @@ export default function HomePage() {
           {/* SportsSection */}
           <SectionHeader title="Sport turlari" action="Barchasini koʻrish" onAction={() => goToEvents({})} />
           <View style={styles.sportsGrid}>
-            {data.sports.map((sport) => (
+            {data.sports.slice(0, HOME_SPORTS_COUNT).map((sport) => (
               <Pressable
                 key={sport.sport_id}
                 onPress={() => goToEvents({ sport: String(sport.sport_id) })}
@@ -195,14 +190,6 @@ const styles = StyleSheet.create({
   },
   location: { flexDirection: 'row', alignItems: 'center', gap: 4, paddingVertical: Spacing.sm },
   locationText: { fontWeight: '700' },
-  avatar: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    backgroundColor: Colors.control,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
   brand: { paddingHorizontal: Spacing.lg, paddingTop: Spacing.md, paddingBottom: Spacing.lg, gap: 2 },
   brandName: { color: Colors.text },
   brandAccent: { color: Colors.primary },

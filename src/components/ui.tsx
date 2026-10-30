@@ -20,8 +20,10 @@ import { STATUS_LABELS } from '@/lib/format';
 
 export type IconName = ComponentProps<typeof MaterialCommunityIcons>['name'];
 
-export function Icon(props: ComponentProps<typeof MaterialCommunityIcons>) {
-  return <MaterialCommunityIcons {...props} />;
+// Sport icons come from the database, so an unknown name falls back to a generic one.
+export function Icon({ name, ...props }: ComponentProps<typeof MaterialCommunityIcons>) {
+  const known = name in MaterialCommunityIcons.glyphMap;
+  return <MaterialCommunityIcons name={known ? name : 'trophy-outline'} {...props} />;
 }
 
 /**

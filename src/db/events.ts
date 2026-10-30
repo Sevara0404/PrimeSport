@@ -173,9 +173,18 @@ export async function cancelRegistration(db: SQLiteDatabase, userId: number, eve
   );
 }
 
+/**
+ * Active sports that have at least one event, busiest first. The catalogue can hold ~100
+ * sports, so screens only list the ones people can actually find events for.
+ */
 export async function listSports(db: SQLiteDatabase) {
   return db.getAllAsync<Sport>(
-    `SELECT sport_id, name, icon, status FROM sports WHERE status = 'active' ORDER BY sport_id`,
+    `SELECT s.sport_id, s.name, s.icon, s.status
+     FROM sports s
+     JOIN events e ON e.sport_id = s.sport_id
+     WHERE s.status = 'active'
+     GROUP BY s.sport_id
+     ORDER BY SUM(CASE WHEN e.status IN ('upcoming', 'ongoing') THEN 1 ELSE 0 END) DESC, s.name`,
   );
 }
 

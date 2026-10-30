@@ -21,7 +21,6 @@ export default function RootLayout() {
           }}>
           <Stack.Screen name="(tabs)" options={{ headerShown: false, title: 'Bosh sahifa' }} />
           <Stack.Screen name="event/[id]" options={{ title: 'Tadbir' }} />
-          <Stack.Screen name="profile" options={{ title: 'Profil' }} />
         </Stack>
       </AppStateProvider>
     </SQLiteProvider>

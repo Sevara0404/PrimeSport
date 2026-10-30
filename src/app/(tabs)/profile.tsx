@@ -48,7 +48,7 @@ export default function ProfilePage() {
 
   if (!data) {
     return (
-      <Screen edges={['bottom']}>
+      <Screen>
         <LoadingState />
       </Screen>
     );
@@ -58,7 +58,7 @@ export default function ProfilePage() {
     setOpenSection((current) => (current === section ? null : section));
 
   return (
-    <Screen edges={['bottom']}>
+    <Screen>
       <View style={styles.profile}>
         <View style={styles.avatar}>
           <Icon name="account" size={44} color={Colors.primary} />
