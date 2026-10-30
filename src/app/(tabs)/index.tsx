@@ -74,13 +74,6 @@ export default function HomePage() {
           <AppText style={styles.locationText}>{city}</AppText>
           <Icon name="chevron-down" size={18} color={Colors.textSecondary} />
         </Pressable>
-        <Pressable
-          onPress={() => router.push('/profile')}
-          accessibilityRole="button"
-          accessibilityLabel="Profil"
-          style={styles.avatar}>
-          <Icon name="account" size={24} color={Colors.textSecondary} />
-        </Pressable>
       </View>
 
       {/* BrandSection */}
@@ -195,14 +188,6 @@ const styles = StyleSheet.create({
   },
   location: { flexDirection: 'row', alignItems: 'center', gap: 4, paddingVertical: Spacing.sm },
   locationText: { fontWeight: '700' },
-  avatar: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    backgroundColor: Colors.control,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
   brand: { paddingHorizontal: Spacing.lg, paddingTop: Spacing.md, paddingBottom: Spacing.lg, gap: 2 },
   brandName: { color: Colors.text },
   brandAccent: { color: Colors.primary },
