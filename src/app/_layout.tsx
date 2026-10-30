@@ -1,18 +1,29 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from 'expo-router';
-import * as SplashScreen from 'expo-splash-screen';
-import { useColorScheme } from 'react-native';
+import { Stack } from 'expo-router';
+import { SQLiteProvider } from 'expo-sqlite';
+import { StatusBar } from 'expo-status-bar';
 
-import { AnimatedSplashOverlay } from '@/components/animated-icon';
-import AppTabs from '@/components/app-tabs';
+import { Colors } from '@/constants/theme';
+import { initializeDatabase } from '@/db/schema';
+import { AppStateProvider } from '@/lib/app-state';
 
-SplashScreen.preventAutoHideAsync();
-
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
+export default function RootLayout() {
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <AnimatedSplashOverlay />
-      <AppTabs />
-    </ThemeProvider>
+    <SQLiteProvider databaseName="prime-sport.db" onInit={initializeDatabase}>
+      <AppStateProvider>
+        <StatusBar style="dark" />
+        <Stack
+          screenOptions={{
+            headerTintColor: Colors.primary,
+            headerTitleStyle: { color: Colors.text },
+            headerStyle: { backgroundColor: Colors.surface },
+            contentStyle: { backgroundColor: Colors.background },
+            headerBackTitle: 'Back',
+          }}>
+          <Stack.Screen name="(tabs)" options={{ headerShown: false, title: 'Home' }} />
+          <Stack.Screen name="event/[id]" options={{ title: 'Event' }} />
+          <Stack.Screen name="profile" options={{ title: 'Profile' }} />
+        </Stack>
+      </AppStateProvider>
+    </SQLiteProvider>
   );
 }
