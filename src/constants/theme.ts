@@ -2,18 +2,18 @@ import '@/global.css';
 
 import { Platform } from 'react-native';
 
-// Prime Sport brand palette (from the product brief).
+// Prime Sport brand palette: green and white (Sevara's choice, replacing the brief's blue).
 export const Colors = {
-  primary: '#2563EB',
-  primaryDark: '#1D4ED8',
-  primarySoft: '#DBEAFE',
-  text: '#0F172A',
-  textSecondary: '#64748B',
-  background: '#F8FAFC',
+  primary: '#16A34A',
+  primaryDark: '#15803D',
+  primarySoft: '#DCFCE7',
+  text: '#052E16',
+  textSecondary: '#5B6B60',
+  background: '#F6FBF7',
   surface: '#FFFFFF',
-  border: '#E2E8F0',
-  verifiedBg: '#DCFCE7',
-  verifiedText: '#166534',
+  border: '#E1EDE4',
+  verifiedBg: '#16A34A',
+  verifiedText: '#FFFFFF',
   danger: '#DC2626',
   dangerBg: '#FEE2E2',
   warningBg: '#FEF3C7',
@@ -54,7 +54,7 @@ export const Fonts = Platform.select({
 export const MaxContentWidth = 640;
 
 export const Shadow = Platform.select({
-  web: { boxShadow: '0 1px 3px rgba(15, 23, 42, 0.08)' },
+  web: { boxShadow: '0 1px 3px rgba(5, 46, 22, 0.08)' },
   default: {
     shadowColor: '#0F172A',
     shadowOpacity: 0.06,

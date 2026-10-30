@@ -3,14 +3,14 @@ import { StyleSheet, View, type StyleProp, type ViewStyle } from 'react-native';
 
 import { Icon, type IconName } from './ui';
 
-// Brand-friendly tile colours per sport, used until an event has a real photo.
+// Green brand tiles per sport, used until an event has a real photo.
 const SPORT_TILES: Record<number, { bg: string; fg: string }> = {
   1: { bg: '#15803D', fg: '#DCFCE7' },
-  2: { bg: '#EA580C', fg: '#FFEDD5' },
-  3: { bg: '#65A30D', fg: '#ECFCCB' },
-  4: { bg: '#0891B2', fg: '#CFFAFE' },
-  5: { bg: '#2563EB', fg: '#DBEAFE' },
-  6: { bg: '#7C3AED', fg: '#EDE9FE' },
+  2: { bg: '#166534', fg: '#BBF7D0' },
+  3: { bg: '#16A34A', fg: '#F0FDF4' },
+  4: { bg: '#047857', fg: '#D1FAE5' },
+  5: { bg: '#22C55E', fg: '#F0FDF4' },
+  6: { bg: '#14532D', fg: '#BBF7D0' },
 };
 
 export function EventImage({

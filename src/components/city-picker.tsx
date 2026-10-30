@@ -51,7 +51,7 @@ export function CityPicker({
 const styles = StyleSheet.create({
   backdrop: {
     flex: 1,
-    backgroundColor: 'rgba(15, 23, 42, 0.45)',
+    backgroundColor: 'rgba(5, 46, 22, 0.45)',
     justifyContent: 'center',
     padding: Spacing.xl,
   },

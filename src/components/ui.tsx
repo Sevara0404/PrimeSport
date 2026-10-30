@@ -232,7 +232,7 @@ const textVariants = StyleSheet.create({
 const buttonPalettes = {
   primary: { bg: Colors.primary, fg: Colors.surface, border: Colors.primary },
   secondary: { bg: Colors.surface, fg: Colors.primary, border: Colors.border },
-  success: { bg: Colors.verifiedBg, fg: Colors.verifiedText, border: Colors.verifiedBg },
+  success: { bg: Colors.primarySoft, fg: Colors.primaryDark, border: Colors.primarySoft },
 };
 
 const styles = StyleSheet.create({
