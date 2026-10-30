@@ -1,56 +1,38 @@
-# Welcome to your Expo app 👋
+# Prime Sport
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+**Discover. Participate. Enjoy.**
 
-## Get started
+Sports event discovery and participation app for Tashkent and Uzbekistan. Built with Expo (React Native), so one codebase ships to iOS, Android and the web.
 
-1. Install dependencies
+## MVP features
 
-   ```bash
-   npm install
-   ```
+- **Home**: location, brand, search, quick filters (Today, This Week, Near Me, Free), featured event, nearby events, sports grid, call to action.
+- **Events**: database-driven list with title search and combinable filters (sport, date, city, Near Me, Free) and an empty state.
+- **Event details**: one page for every event, with Save and Register (no duplicates).
+- **Map**: event markers with a preview card that opens the event.
+- **Saved**: saved events for the current user, which persist across restarts.
+- **Profile**: demo user, My Events (registrations), Settings and About.
 
-2. Start the app
+## Data
 
-   ```bash
-   npx expo start
-   ```
+Data lives in an on-device SQLite database (`src/db/`). The schema follows the product brief: `sports`, `organizers`, `events`, `users`, `saved_events` and `registrations`, with foreign keys, unique constraints and indexes. Events also have `price` (for the Free filter) and `city` (for city selection).
 
-In the output, you'll find options to open the app in a
+The app ships with **sample data** (`src/db/seed.ts`): fictional organizers, approximate demo coordinates, and demo verification flags. Every sample event is marked `is_sample` and labelled "Sample event" in the app. Replace this data with real organizer data before launch.
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+Until sign-in exists, everyone uses a single demo user.
 
-You can start developing by editing the files inside the **src/app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+## Run it
 
 ```bash
-npm run reset-project
+npm install
+npx expo start        # scan the QR code with Expo Go on your phone
+npx expo start --web  # browser preview
 ```
 
-This command will move the starter code to the **example** directory and create a blank **src/app** directory where you can start developing.
+Checks: `npx tsc --noEmit` and `npx expo lint`.
 
-### Other setup steps
+## Next steps
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+1. Move events to a hosted database so organizers can update them without an app release.
+2. Add the logo and app icon.
+3. Store preparation: privacy policy, store listing, a Google Maps API key for Android, then build and submit with EAS.
